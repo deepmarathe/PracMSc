@@ -1,0 +1,91 @@
+Aim:- 3b.Design intelligent agent using any AI algorithm.
+design expert tutoring system
+Genetic Algorithm to Solve a Simple String Matching Problem
+This example demonstrates a genetic algorithm that evolves a
+population of strings to match a target string.
+Theory:-
+An intelligent agent is an autonomous entity that observes and acts
+upon an environment and directs its activity towards achieving goals.
+It can be a software program or a robotic system.
+Characteristics of Intelligent Agents
+* Autonomy: Operates without human intervention.
+* Reactive: Responds to changes in the environment.
+* Proactive: Takes initiative to achieve goals.
+* Social: Communicates and cooperates with other agents or
+humans.
+Example of an Intelligent Agent: Self-Driving Car
+Explanation:-
+What Happened Here? Early Convergence: In this case, the algorithm
+reached the optimal solution "HELLO" in just 3 generations. The best
+individual in Generation 2 matches the target string exactly, achieving
+a fitness score of 5 (perfect match).
+Parameters: The increased population size (50 instead of 10) and the
+ability to run for 200 generations gave the algorithm more
+opportunities to explore different combinations. Additionally, a larger
+tournament size for selecting parents (5 individuals) helps maintain
+better diversity, leading to quicker convergence
+
+When you increase the population size and allow more generations,
+the genetic algorithm has more time and diversity to evolve toward
+the optimal solution. This demonstrates the importance of balancing
+the parameters of the genetic algorithm to improve its performance.
+The success of the algorithm depends on finding the right balance
+between exploration (mutation, diversity) and exploitation (selection
+of the best individuals
+Code:-
+import random
+import string
+# Genetic Algorithm parameters
+target_string = "HELLO"
+population_size = 50 # Increased population size
+mutation_rate = 0.01
+generations = 200 # Increased generations for more evolution
+# Fitness function: number of characters matching the target
+def fitness(individual):
+ return sum(1 for a, b in zip(individual, target_string) if a == b)
+# Create initial population (random strings)
+def create_population(size):
+ return [''.join(random.choices(string.ascii_uppercase,
+k=len(target_string))) for _ in range(size)]
+# Select parents (tournament selection)
+
+def select_parents(population):
+ tournament = random.sample(population, 5) # Select 5 individuals
+instead of 3 for better diversity
+ return max(tournament, key=fitness)
+# Crossover (single-point crossover)
+def crossover(parent1, parent2):
+ crossover_point = random.randint(1, len(parent1) - 1)
+ return parent1[:crossover_point] + parent2[crossover_point:]
+# Mutation (random character mutation)
+def mutate(individual):
+ individual = list(individual)
+ for i in range(len(individual)):
+ if random.random() < mutation_rate:
+ individual[i] = random.choice(string.ascii_uppercase)
+ return ''.join(individual)
+# Main genetic algorithm loop
+population = create_population(population_size)
+for generation in range(generations):
+ best_individual = max(population, key=fitness)
+ print(f"Generation {generation}: Best individual:
+{best_individual}, Fitness: {fitness(best_individual)}")
+
+ if fitness(best_individual) == len(target_string): # Stop early if the
+optimal solution is found
+ break
+
+ # Create new generation
+ new_population = []
+ for _ in range(population_size):
+ parent1 = select_parents(population)
+ parent2 = select_parents(population)
+ child = crossover(parent1, parent2)
+ child = mutate(child)
+ new_population.append(child)
+
+ population = new_population
+# Best individual in the final population
+best_individual = max(population, key=fitness)
+print(f"Best individual: {best_individual}, Fitness:
+{fitness(best_individual)}")

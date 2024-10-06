@@ -1,0 +1,105 @@
+Practical 1c
+Aim:-Implement Conditional Probability and joint
+probability using Python.
+Theory:-
+1. Joint Probability: Joint probability refers to the probability of two
+events happening at the same time. It represents the likelihood of both
+events occurring simultaneously. In probability theory, the joint
+probability of two events (A) and (B) is denoted as ( P(A, B)).
+For example, if you roll two dice, the joint probability of getting a 3
+on the first die and a 4 on the second die would be the product of the
+probabilities of getting a 3 on the first die and a 4 on the second die.
+Mathematical Definition:
+The joint probability of two events (A) and (B) occurring together is
+defined as:
+P(A and B) = P(A) * P(B)
+If the two events are independent (i.e., one event does not affect the
+other), the joint probability is the product of the probabilities of the
+two events:
+Conditional Probability:
+In the case where events A and B are independent (where event A has
+no effect on the probability of event B), the conditional probability of
+event B given event A is simply the probability of event B, that is
+P(B)
+P(A and B) = P(A)P(B|A)
+2. Conditional Probability:
+Conditional probability refers to the probability of an event occurring
+given that another event has already occurred. It quantifies the
+probability of one event happening under the assumption that another
+
+event is true. It is denoted by ( P(A | B) ), which reads as "the
+probability of ( A) given (B )."
+Mathematical Definition: The conditional probability of event ( A )
+given that event (B) has occurred is defined as:
+Events A and B are independent(i.e., events whose probability of
+occurring together is the product of their individual probabilities). if
+P(A∩B)=P(A)⋅P(B)P(A∩B)=P(A)⋅P(B)
+If A and B are not independent then they are dependent.
+Conditional probability adjusts the probability of an event based on
+new information. For example, if you already know that it is raining
+(event ( B)), the probability of you carrying an umbrella (event (A))
+may increase.
+Example:
+Suppose:
+A single fair die is rolled. Let A={3}A={3} and B={1,3,5}B={1,3,5}.
+Are A and B independent
+Solution
+In this example we can compute all three probabilities
+P(A)=16P(A)=16, P(B)=12P(B)=12,
+and P(A∩B)=P({3})=16P(A∩B)=P({3})=16. Since the
+product P(A)⋅P(B)=(16)(12)=112P(A)⋅P(B)=(16)(12)=112 is not the
+same number as P(A∩B)=16P(A∩B)=16, the events A and B are
+not independent
+Relationship Between Joint and Conditional Probability:
+Joint and conditional probability are closely related through Bayes'
+Theorem. You can rearrange the formula for conditional probability to
+express the joint probability in terms of conditional probability:
+The joint probability P(A∩B) can be expressed in terms of the
+conditional probability: P(A∩B)=P(A∣B)⋅P(B)
+
+This shows that the joint probability is the product of the
+conditional probability of A given Band the probability of B.
+Similarly, you could also express the joint probability as:
+P(A∩B)=P(B∣A)⋅P(A)
+In summary, joint probability is essentially the "unconditional"
+version of the overlap between two events, while conditional
+probability looks at how likely one event is given that the other has
+already happened. These two concepts are tightly linked through the
+formulas above.
+The joint probability P(A∩B) represents the probability that it rains
+and your friend carries an umbrella.
+The conditional probability P(A∣B) represents the probability that it
+rains, given that your friend carries an umbrella.
+The relationship between them is P(A∩B)=P(A∣B)⋅P(B)
+Both concepts are fundamental in understanding how events relate to
+each other in probability theory and are used in various applications
+such as decision-making, risk assessment, and machine learning.
+Code:-
+import pandas as pd
+# Load the penguins dataset from a CSV file
+df = pd.read_csv('penguins.csv')
+# Preview the data
+print("Data Preview:")
+print(df.head())
+# Create a pivot table for joint probability
+
+# Pivot table will be for Species (rows) and Island (columns), and
+we'll compute frequencies
+pivot_table = pd.crosstab(df['species'], df['island'], normalize=True)
+print("\nJoint Probability (Pivot Table):")
+print(pivot_table)
+# Example: Conditional Probability of Species given Island
+# We can normalize along columns to get conditional probabilities
+conditional_probability = pivot_table.div(pivot_table.sum(axis=0),
+axis=1)
+print("\nConditional Probability of Species given Island:")
+print(conditional_probability)
+# To calculate Joint Probability, we already have it in the pivot table,
+normalized=True gives joint probabilities
+print("\nJoint Probability is represented in the pivot table (Species vs
+Island):")
+print(pivot_table)
+# Example: Calculating P(Species = Adelie | Island = Biscoe)
+p_adelie_given_biscoe = conditional_probability.loc['Adelie',
+'Biscoe']
+print(f"\nP(Adelie | Biscoe) = {p_adelie_given_biscoe:.4f}")

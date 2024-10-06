@@ -1,0 +1,105 @@
+Practical 1a
+Module 1:-Expert System its Applications, Probability theory
+Aim:-Design an Expert system using AIML.
+Theory:-
+Design an Expert system using AIML E.g: An expert system for
+responding the patient query for identifying the flu.
+Concept: Artificial Intelligence Markup Language is referred to as
+AIML. It was the Alicebot that created AIML. It's a community for
+free software. Dr. Richard S. Wallace from 1995 to the present. An
+application called a chat box is made with AIML. In order to create an
+expert system using AIML, the following points should be taken into
+account.
+* In an expert system there are three main components: User Interface,
+Inference Engine and Knowledge Base
+User Interface: Uses various user interfaces, such as menus,
+graphics, and dashboards, or Natural Language Processing (NLP) to
+communicate with the user.
+Expert System: A software program that makes decisions or provides
+advice based on databases of expert knowledge in various contexts,
+such as medical diagnosis. An expert system is a computer program
+that solves problems in a specialized field that typically calls for
+human expertise using techniques from artificial intelligence.
+A well-organized collection of data about the system's domain is
+called a knowledge base.
+The knowledge base's facts are interpreted and assessed by the
+inference engine, which then outputs the desired results or an answer.
+AAI Practical Gayatri Kulkarni -53004230002 MSCIT PART2 SEM III
+2 | P a g e A A I P R A C T I C A L J O U R N A L 2 0 2 4 - 2 5
+* The expert system communicates with the user through a readable
+user interface, receives queries as input, and outputs results.
+
+Code:-
+Flu.aiml
+<aiml version="1.0.1" encoding="UTF-8">
+ <category>
+ <pattern>WHAT ARE FLU SYMPTOMS<pattern>
+ <template>
+ Flu symptoms usually include fever, chills, muscle aches,
+cough, congestion, runny nose, headaches, and fatigue.
+ <template>
+ <category>
+ <category>
+ <pattern>I HAVE FEVER AND COUGH<pattern>
+ <template>
+
+ These symptoms could be associated with the flu. However, I
+recommend visiting a healthcare professional for an accurate
+diagnosis.
+ <template>
+ <category>
+ <category>
+ <pattern>IS FLU CONTAGIOUS<pattern>
+ <template>
+ Yes, flu is highly contagious and can spread easily from
+person to person.
+ <template>
+ <category>
+ <category>
+ <pattern>HOW CAN I PREVENT FLU<pattern>
+ <template>
+ The best way to prevent the flu is by getting a flu vaccine each
+year. Additionally, wash your hands frequently, avoid close contact
+with sick people, and maintain a healthy lifestyle.
+ <template>
+ <category>
+ <category>
+ <pattern>THANK YOU<pattern>
+ <template>
+
+ You're welcome! Take care and stay healthy.
+ <template>
+ <category>
+ <category>
+ <pattern>BYE<pattern>
+ <template>
+ Goodbye! Feel free to reach out if you have more questions.
+ <template>
+ <category>
+ <category>
+ <pattern>FLU*<pattern>
+ <template>
+ Could you please provide more details about your symptoms
+so that I can assist you better?
+ <template>
+ <category>
+<aiml>
+python
+import aiml
+# Create a Kernel instance
+kernel = aiml.Kernel()
+
+# Load AIML files
+kernel.learn("flu.aiml")
+# Loop to interact with the expert system
+print("Expert System for Identifying Flu Symptoms")
+print("Type 'bye' to exit the conversation.")
+while True:
+ user_input = input("You: ")
+ # Exit the conversation if the user types 'bye'
+ if user_input.lower() == "bye":
+ print("System: Goodbye! Stay healthy.")
+ break
+ # Get the system's response
+ response = kernel.respond(user_input.upper())
+ # Print the system's respon

@@ -1,0 +1,61 @@
+Aim:- 3a.Simulate genetic algorithm with suitable
+example using Python any other platform.
+To create a Python program that functions as a basic math tutor,
+capable of explaining and performing basic arithmetic operations
+(addition, subtraction, multiplication, and division). The program
+should help users understand the operations and perform calculations
+based on user input.
+Theory:-
+- Genetic Algorithms are search heuristics inspired by Charles
+Darwin's theory of natural evolution. They are used to find
+approximate solutions to optimization and search problems by
+mimicking the process of natural selection.
+Key Concepts:
+1. Population: A set of potential solutions to the problem.
+2. Chromosomes: Each individual in the population is represented by a chromosome, which is a string of data (usually binary) encoding a potential solution.
+3. Genes: A chromosome is composed of genes, which represent specific features of the solution.
+4. Fitness Function: A function that evaluates how close a given solution is to the optimal solution. The higher the fitness, the better the solution.
+5. Selection: The process of choosing individuals from the current population based on their fitness to create the next generation.
+6. Crossover (Recombination): Combining two parent chromosomes to produce offspring. It helps to explore new areas of the solution space.
+7. Mutation: Randomly altering genes in a chromosome to maintain
+diversity in the population and prevent premature convergence to a
+suboptimal solution.
+Step-by-Step Explanation:
+1. Initialization: Start with a randomly generated population of chromosomes.
+2. Evaluation: Calculate the fitness of each chromosome using the fitness function.
+3. Selection: Select the fittest individuals to become parents for the next generation.
+4. Crossover: Perform crossover between pairs of parents to produce offspring (new chromosomes).
+5. Mutation: Apply mutation to some of the offspring to introduce new genetic material.
+6. Replacement: Replace the old population with the new generation.
+7. Repeat: Continue the process for several generations until a
+termination condition is met (e.g., a solution with sufficient fitness is
+found or a maximum number of generations is reached).
+Code:-
+class MathTutor:
+ def _init_(self):
+ self.operations = {
+ '+': lambda a, b: a + b,
+ '-': lambda a, b: a - b,
+ '*': lambda a, b: a * b,
+ '': lambda a, b: a b,
+ }
+ def explain_operation(self, operator):
+ explanation = {
+ '+': "Addition adds two numbers together.",
+ '-': "Subtraction subtracts the second number from the first.",
+ '*': "Multiplication gives the product of two numbers.",
+ '': "Division divides the first number by the second.",
+ }
+ return explanation.get(operator, "Invalid operation.")
+ def perform_operation(self, operator, a, b):
+ if operator in self.operations:
+ return self.operations[operator](a, b)
+ else:return None
+if _name_ == "_main_":
+ tutor = MathTutor()
+ # Example usage:
+ operator = ''
+ a, b = 10, 5
+ print(tutor.explain_operation(operator))
+ result = tutor.perform_operation(operator, a, b)
+ print(f"Result of {a} {operator} {b} = {result}")
